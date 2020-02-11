@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * @version 1
  * @since MarcoCalzada
  */
-@Service
+@Service("serviceRestTemplate")
 public class ItemServiceImpl implements ItemService
 {
     @Autowired
@@ -25,7 +25,7 @@ public class ItemServiceImpl implements ItemService
     @Override
     public List<Item> findAll()
     {
-        List<Producto> productos = Arrays.asList(clienteRest.getForObject("http://localhost:8001/listar", Producto[].class));
+        List<Producto> productos = Arrays.asList(clienteRest.getForObject("http://servicio-productos/listar", Producto[].class));
         return productos.stream().map(p -> new Item(p, 1)).collect(Collectors.toList());
     }
 
@@ -34,6 +34,6 @@ public class ItemServiceImpl implements ItemService
     {
         Map<String, String> pathVariables = new HashMap<>();
         pathVariables.put("id", id.toString());
-        return new Item(clienteRest.getForObject("http://localhost:8001/ver/{id}", Producto.class, pathVariables), cantidad);
+        return new Item(clienteRest.getForObject("http://servicio-productos/ver/{id}", Producto.class, pathVariables), cantidad);
     }
 }
