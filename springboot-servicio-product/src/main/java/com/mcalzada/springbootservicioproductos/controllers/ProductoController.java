@@ -32,10 +32,7 @@ public class ProductoController
     @GetMapping("/listar")
     public List<Producto> listar()
     {
-        return productoService.findAll().stream().map(p -> {
-            p.setPort(port);
-            return p;
-        }).collect(Collectors.toList());
+        return productoService.findAll().stream().peek(p -> p.setPort(port)).collect(Collectors.toList());
     }
 
     @GetMapping("/ver/{id}")
