@@ -3,6 +3,7 @@ package com.mcalzada.springbootservicioitem.service;
 import com.mcalzada.springbootservicioitem.clientes.ProductoClienteRest;
 import com.mcalzada.springbootservicioitem.models.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +35,6 @@ public class ItemServiceFeignImpl implements ItemService
     {
         return new Item(clienteFeign.detalle(id), cantidad);
     }
+
+
 }
